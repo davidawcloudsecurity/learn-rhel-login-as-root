@@ -43,7 +43,7 @@ echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
 echo "PasswordAuthentication yes" >> /etc/ssh/sshd_config
 # Update root password
 echo "root:$ROOT_PASSWORD" | chpasswd
-
+mv /etc/ssh/sshd_config.d/50-cloud-init.conf /etc/ssh/sshd_config.d/50-cloud-init.conf.bak
 # Restart sshd to apply changes
 systemctl restart sshd
 
@@ -52,18 +52,18 @@ ARCH=$(uname -m)
 
 if [ "$ARCH" == "x86_64" ]; then
     # Install for 64-bit (x86_64) architecture
-    sudo dnf install -y https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_amd64/amazon-ssm-agent.rpm
+    dnf install -y https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_amd64/amazon-ssm-agent.rpm
 elif [ "$ARCH" == "aarch64" ]; then
     # Install for ARM architecture (arm64)
-    sudo dnf install -y https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_arm64/amazon-ssm-agent.rpm
+    dnf install -y https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_arm64/amazon-ssm-agent.rpm
 else
     echo "Unsupported architecture: $ARCH"
     exit 1
 fi
 
-systemctl status amazon-ssm-agent
 sudo systemctl enable amazon-ssm-agent
 sudo systemctl start amazon-ssm-agent
+systemctl status amazon-ssm-agent
 ```
 Resource - https://phoenixnap.com/kb/ssh-permission-denied-publickey
 ## Set unconfined users to confined
