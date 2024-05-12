@@ -1,4 +1,4 @@
-# Weak sshd
+# Strong sshd
 #       $OpenBSD: sshd_config,v 1.104 2021/07/02 05:11:21 dtucker Exp $
 
 # This is the sshd server system-wide configuration file.  See
@@ -67,7 +67,7 @@ AuthorizedKeysFile      .ssh/authorized_keys
 #PermitEmptyPasswords no
 
 # Change to no to disable s/key passwords
-#KbdInteractiveAuthentication yes
+KbdInteractiveAuthentication yes
 
 # Kerberos options
 #KerberosAuthentication no
@@ -129,5 +129,20 @@ Subsystem       sftp    /usr/libexec/openssh/sftp-server
 #       AllowTcpForwarding no
 #       PermitTTY no
 #       ForceCommand cvs server
-PermitRootLogin yes
 PasswordAuthentication yes
+PermitRootLogin yes
+LogLevel INFO
+X11Forwarding no
+MaxAuthTries 4
+IgnoreRhosts yes
+HostbasedAuthentication no
+PermitEmptyPasswords no
+PermitUserEnvironment yes
+ClientAliveInterval 300
+ClientAliveCountMax 0
+LoginGraceTime 60
+Banner /etc/issue.net
+Allowtcpforwarding no
+maxstartups 10:30:60
+maxsessions 4
+ChallengeResponseAuthentication no
