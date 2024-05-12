@@ -1,6 +1,11 @@
 # learn-rhel-login-as-root
 How to login to rhel as root or other users
 
+When use RHEL it will create /etc/ssh/sshd_config.d/50-cloud-init.conf and in it this will get append to.
+```ruby
+PasswordAuthentication no
+```
+
 ## How to read logs
 
 ```ruby
