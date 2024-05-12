@@ -10,5 +10,12 @@ journalctl _COMM=sshd
 ```
 https://serverfault.com/questions/465833/where-is-the-sshd-log-file-on-red-hat-linux-stored
 
+## How to enable root/user login using password
+```ruby
+sudo vi /etc/ssh/sshd_config.d/50-cloud-init.conf
+
+PasswordAuthentication yes
+```
+
 ## Set unconfined users to confined
 https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/using_selinux/managing-confined-and-unconfined-users_using-selinux#confining-regular-users_managing-confined-and-unconfined-users
