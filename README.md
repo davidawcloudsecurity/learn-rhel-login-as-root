@@ -40,6 +40,6 @@ echo "root:$ROOT_PASSWORD" | chpasswd
 # Restart sshd to apply changes
 systemctl restart sshd
 ```
-
+Resource - https://phoenixnap.com/kb/ssh-permission-denied-publickey
 ## Set unconfined users to confined
 https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/using_selinux/managing-confined-and-unconfined-users_using-selinux#confining-regular-users_managing-confined-and-unconfined-users
