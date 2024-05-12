@@ -16,6 +16,13 @@ sudo vi /etc/ssh/sshd_config.d/50-cloud-init.conf
 
 PasswordAuthentication yes
 ```
+Check if /etc/ssh/sshd_config.d/50-cloud-init.conf or /etc/ssh/sshd_config.d/50-redhat.conf and disable accordingly
+
+You just need to enable
+```ruby
+PermitRootLogin yes
+PasswordAuthentication yes
+```
 ```ruby
 #!/bin/bash
 
