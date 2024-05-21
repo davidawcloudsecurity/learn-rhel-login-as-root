@@ -48,6 +48,7 @@ echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
 echo "PasswordAuthentication yes" >> /etc/ssh/sshd_config
 # Update root password
 echo "root:$ROOT_PASSWORD" | chpasswd
+rm -rf /etc/ssh/sshd_config.d/50-cloud-init.conf.bak
 mv /etc/ssh/sshd_config.d/50-cloud-init.conf /etc/ssh/sshd_config.d/50-cloud-init.conf.bak
 # Restart sshd to apply changes
 systemctl restart sshd
