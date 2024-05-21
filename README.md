@@ -48,20 +48,16 @@ echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
 echo "PasswordAuthentication yes" >> /etc/ssh/sshd_config
 # Update root password
 echo "root:$ROOT_PASSWORD" | chpasswd
-rm -rf /etc/ssh/sshd_config.d/50-cloud-init.conf.bak
 
-# List of files to check
-files_to_check=("/etc/ssh/sshd_config.d/50-cloud-init.conf")
-
-# Loop through the list of files
-for file in "${files_to_check[@]}"; do
-    if [[ -f "$file" ]]; then
-        echo "File $file exists."
-        mv /etc/ssh/sshd_config.d/50-cloud-init.conf /etc/ssh/sshd_config.d/50-cloud-init.conf.bak
-    else
-        echo "File $file does not exist."
-    fi
+# Loop until the file is found
+while [ ! -f /etc/ssh/sshd_config.d/50-cloud-init.conf ]; do
+    echo "File not found. Checking again in 10 seconds..."
+    sleep 10
 done
+
+echo "File /etc/ssh/sshd_config.d/50-cloud-init.conf exists."
+rm -rf /etc/ssh/sshd_config.d/50-cloud-init.conf.bak
+mv /etc/ssh/sshd_config.d/50-cloud-init.conf /etc/ssh/sshd_config.d/50-cloud-init.conf.bak
 
 # Restart sshd to apply changes
 systemctl restart sshd
