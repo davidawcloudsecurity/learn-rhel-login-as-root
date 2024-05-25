@@ -76,8 +76,8 @@ else
     exit 1
 fi
 
-sudo systemctl enable amazon-ssm-agent
-sudo systemctl start amazon-ssm-agent
+systemctl enable amazon-ssm-agent
+systemctl start amazon-ssm-agent
 systemctl status amazon-ssm-agent
 ```
 Resource - https://phoenixnap.com/kb/ssh-permission-denied-publickey
